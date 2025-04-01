@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 
 function App() {
@@ -34,6 +34,25 @@ function App() {
   
   // Message for new achievements
   const [newAchievement, setNewAchievement] = useState(null);
+
+  // Check for score-based achievements (wrapped in useCallback to avoid dependency issues)
+  const checkAchievements = useCallback((currentScore) => {
+    const newAchievements = [...achievements];
+    let updated = false;
+    
+    newAchievements.forEach((achievement, index) => {
+      if (!achievement.achieved && achievement.threshold && currentScore >= achievement.threshold) {
+        newAchievements[index].achieved = true;
+        updated = true;
+        setNewAchievement(achievement.name);
+        setTimeout(() => setNewAchievement(null), 3000);
+      }
+    });
+    
+    if (updated) {
+      setAchievements(newAchievements);
+    }
+  }, [achievements]);
   
   // Load game from localStorage
   useEffect(() => {
@@ -77,7 +96,7 @@ function App() {
     }, 1000);
     
     return () => clearInterval(interval);
-  }, [autoClickValue]);
+  }, [autoClickValue, checkAchievements]);
 
   // Handle manual clicking
   const handleClick = () => {
@@ -160,25 +179,6 @@ function App() {
         setNewAchievement(newAchievements[achievementIndex].name);
         setTimeout(() => setNewAchievement(null), 3000);
       }
-    }
-  };
-
-  // Check for score-based achievements
-  const checkAchievements = (currentScore) => {
-    const newAchievements = [...achievements];
-    let updated = false;
-    
-    newAchievements.forEach((achievement, index) => {
-      if (!achievement.achieved && achievement.threshold && currentScore >= achievement.threshold) {
-        newAchievements[index].achieved = true;
-        updated = true;
-        setNewAchievement(achievement.name);
-        setTimeout(() => setNewAchievement(null), 3000);
-      }
-    });
-    
-    if (updated) {
-      setAchievements(newAchievements);
     }
   };
   
