@@ -1,21 +1,254 @@
 .App {
   text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-button {
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #444;
+  border-bottom: 2px solid #61dafb;
+  padding-bottom: 5px;
+  margin-top: 30px;
+}
+
+/* Score Section */
+.score-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.score {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #2c3e50;
+}
+
+.click-value, .auto-click {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin: 5px 0;
+}
+
+/* Click Button */
+.click-button {
   font-size: 24px;
   margin: 20px;
-  padding: 10px 20px;
+  padding: 15px 30px;
   background-color: #61dafb;
   border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.click-button:hover {
+  background-color: #49c8e8;
+  transform: scale(1.05);
+}
+
+.click-button:active, .button-clicked {
+  background-color: #3bb6d8;
+  transform: scale(0.95);
+}
+
+/* Game Sections Container */
+.game-sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Upgrades and Auto-clickers Sections */
+.upgrades-section, .auto-clickers-section {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.upgrades-list, .auto-clickers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.upgrade-item, .auto-clicker-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.upgrade-item:hover, .auto-clicker-item:hover {
+  transform: translateY(-2px);
+}
+
+.upgrade-info, .auto-clicker-info {
+  text-align: left;
+  flex: 1;
+}
+
+.upgrade-info h3, .auto-clicker-info h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+}
+
+.upgrade-info p, .auto-clicker-info p {
+  margin: 3px 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Buy Buttons */
+.upgrade-item button, .auto-clicker-item button {
+  font-size: 14px;
+  padding: 8px 15px;
   border-radius: 5px;
+  margin: 0;
+  transition: all 0.2s ease;
+}
+
+.can-buy {
+  background-color: #27ae60;
+  color: white;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #49c8e8;
+.can-buy:hover {
+  background-color: #219653;
 }
 
-button:active {
-  background-color: #3bb6d8;
+.cannot-buy {
+  background-color: #bdc3c7;
+  color: #7f8c8d;
+  cursor: not-allowed;
+}
+
+/* Achievements Section */
+.achievements-section {
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.achievements-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.achievement-item {
+  width: 200px;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.achievement-item:hover {
+  transform: translateY(-2px);
+}
+
+.achieved {
+  background-color: #dff9fb;
+  border: 1px solid #c7ecee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.not-achieved {
+  background-color: #f1f1f1;
+  border: 1px dashed #dcdde1;
+  color: #95a5a6;
+}
+
+.achievement-item h3 {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+}
+
+.achievement-item p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* Achievement notification */
+.achievement-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #fdcb6e;
+  color: #6b5b38;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  animation: slideIn 0.5s ease-out forwards;
+  z-index: 1000;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Game Footer */
+.game-footer {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  color: #95a5a6;
+  font-size: 0.8rem;
+}
+
+.reset-button {
+  font-size: 14px;
+  padding: 8px 15px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.reset-button:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .game-sections {
+    flex-direction: column;
+  }
+  
+  .upgrades-section, .auto-clickers-section {
+    width: 100%;
+  }
 }
